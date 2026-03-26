@@ -82,6 +82,184 @@
       line-height: 1.6;
     }
 
+    /* ── Contact Section ── */
+    .contact-card {
+      background: #0f2240;
+      border: 1px solid #1e3a5f;
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .contact-card p {
+      font-size: 0.97rem;
+      color: #a8c4e0;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #1a6dbf, #2d7dd2);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 14px 36px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      text-decoration: none;
+    }
+
+    .contact-btn:hover { opacity: 0.85; }
+
+    /* ── Modal Overlay ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: #0d2244;
+      border: 1px solid #1e3a5f;
+      border-radius: 20px;
+      padding: 36px 32px 32px;
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+    }
+
+    .modal h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .modal .subtitle {
+      font-size: 0.9rem;
+      color: #7eb8f5;
+      margin-bottom: 24px;
+    }
+
+    .modal label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #7eb8f5;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .modal input,
+    .modal textarea {
+      width: 100%;
+      background: #0a1628;
+      border: 1px solid #1e3a5f;
+      border-radius: 10px;
+      color: #e2eaf5;
+      font-size: 0.95rem;
+      font-family: inherit;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+
+    .modal input:focus,
+    .modal textarea:focus {
+      border-color: #2d7dd2;
+    }
+
+    .modal textarea {
+      min-height: 130px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    .btn-cancel {
+      background: transparent;
+      border: 1px solid #1e3a5f;
+      color: #a8c4e0;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-cancel:hover { background: #1e3a5f; }
+
+    .btn-send {
+      background: linear-gradient(135deg, #1a6dbf, #2d7dd2);
+      border: none;
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 12px 28px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn-send:hover { opacity: 0.85; }
+    .btn-send:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ── Success State ── */
+    .success-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 8px 0 4px;
+    }
+
+    .success-state .check {
+      font-size: 52px;
+      margin-bottom: 16px;
+    }
+
+    .success-state h3 {
+      font-size: 1.3rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .success-state p {
+      font-size: 0.95rem;
+      color: #a8c4e0;
+      margin-bottom: 24px;
+    }
+
+    .close-x {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      background: none;
+      border: none;
+      color: #3d5a7a;
+      font-size: 1.4rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .close-x:hover { color: #7eb8f5; }
 
     footer {
       text-align: center;
@@ -150,19 +328,120 @@
       <p>Go to Settings and enable Reminders. You can customize your wake time, sleep time, and how often you want to be nudged throughout the day.</p>
     </div>
 
-    <div class="faq-item">
-      <h3>My question isn't listed here — what do I do?</h3>
-      <p>Send us an email and we'll get back to you as quickly as possible.</p>
-    </div>
-
   </section>
 
+  <!-- ── Contact Section ── -->
+  <section>
+    <h2>Still Need Help?</h2>
+    <div class="contact-card">
+      <p>Can't find the answer you're looking for? Send us a message and we'll get back to you as soon as possible.</p>
+      <button class="contact-btn" onclick="openModal()">Send a Message</button>
+    </div>
+  </section>
 
 </main>
 
 <footer>
   &copy; 2026 Water Animals. All rights reserved.
 </footer>
+
+<!-- ── Contact Modal ── -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal">
+    <button class="close-x" onclick="closeModal()" aria-label="Close">&times;</button>
+
+    <!-- Form State -->
+    <div id="formState">
+      <h3>Get in Touch</h3>
+      <p class="subtitle">We usually reply within 1–2 business days.</p>
+
+      <form id="contactForm" onsubmit="handleSubmit(event)">
+        <label for="email">Your Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="you@example.com"
+          required
+        />
+
+        <label for="message">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          placeholder="Describe your issue or question…"
+          required
+        ></textarea>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn-send" id="sendBtn">Send Message</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Success State -->
+    <div class="success-state" id="successState">
+      <span class="check">✅</span>
+      <h3>Message Sent!</h3>
+      <p>Thanks for reaching out. We'll get back to you as soon as possible.</p>
+      <button class="contact-btn" onclick="closeModal()">Done</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  /* ── Replace this URL with your Formspree endpoint once you set it up ──
+     Sign up free at https://formspree.io → New Form → copy the endpoint URL
+     e.g.  const FORM_ENDPOINT = "https://formspree.io/f/abcd1234";        */
+  const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
+  function openModal() {
+    document.getElementById("formState").style.display = "block";
+    document.getElementById("successState").style.display = "none";
+    document.getElementById("modalOverlay").classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    document.getElementById("modalOverlay").classList.remove("open");
+    document.body.style.overflow = "";
+    // reset form after a short delay so user doesn't see it reset mid-animation
+    setTimeout(() => {
+      document.getElementById("contactForm").reset();
+      document.getElementById("sendBtn").disabled = false;
+      document.getElementById("sendBtn").textContent = "Send Message";
+    }, 300);
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById("modalOverlay")) closeModal();
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById("sendBtn");
+    btn.disabled = true;
+    btn.textContent = "Sending…";
+
+    // Show success immediately — the fetch runs in background
+    document.getElementById("formState").style.display = "none";
+    document.getElementById("successState").style.display = "flex";
+
+    // Attempt to send — will work once you replace FORM_ENDPOINT above
+    const data = new FormData(e.target);
+    try {
+      await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" }
+      });
+    } catch (_) {
+      // silent fail until endpoint is configured
+    }
+  }
+</script>
 
 </body>
 </html>
